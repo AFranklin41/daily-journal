@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+
+		<link rel="stylesheet" href="styles/journal.css" />
+		
+	</head>
+	<body>
+		<h1 class="journal__header">Daily Journal</h1>
+		<form action="" class="journal__form">
+			<fieldset class="form-row">
+				<label for="journalDate">Date of entry</label>
+				<input type="date" name="journalDate" id="journalDate" />
+			</fieldset>
+			<fieldset class="form-row">
+				<label for="journalConcept">Concepts covered</label>
+				<input type="text" name="journalConcept" id="journalConcept" />
+			</fieldset>
+			<fieldset class="form-row">
+				<label for="journalEntry">Journal Entry</label>
+				<textarea
+					name="journalEntry"
+					id="journalEntry"
+					cols="30"
+					rows="5"
+				></textarea>
+			</fieldset>
+			<fieldset class="form-row">
+				<label for="journalMood">Mood for the day</label>
+				<select name="journalMood" id="journalMood">
+					<option value="meh">meh</option>
+					<option value="purple">purple</option>
+					<option value="German">German</option>
+				</select>
+			</fieldset>
+		</form>
+		<article class="entryLog">
+
+		</article>
+
+		<script src="scripts/journal.js"></script>
+	</body>
+</html>

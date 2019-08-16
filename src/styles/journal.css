@@ -1,0 +1,17 @@
+.journal__header {
+    display: flex;
+    justify-content: center;
+}
+
+.journal__form {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.form-row {
+    display: flex;
+    justify-content: end;
+}
+.form-row > input {
+    display: flex;
+}
