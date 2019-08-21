@@ -7,23 +7,33 @@
 		<title>Document</title>
 
 		<link rel="stylesheet" href="styles/journal.css" />
-		
 	</head>
 	<body>
 		<h1 class="journal__header">Daily Journal</h1>
-		<form action="" class="journal__form">
+		<form action="" class="journal__form" id="journalForm">
 			<fieldset class="form-row">
 				<label for="journalDate">Date of entry</label>
-				<input type="date" name="journalDate" id="journalDate" />
+				<input
+					type="date"
+					name="journalDate"
+					class="journalEntryInput"
+					id="journalDate"
+				/>
 			</fieldset>
 			<fieldset class="form-row">
 				<label for="journalConcept">Concepts covered</label>
-				<input type="text" name="journalConcept" id="journalConcept" />
+				<input
+					type="text"
+					name="journalConcept"
+					class="journalEntryInput"
+					id="journalConcept"
+				/>
 			</fieldset>
 			<fieldset class="form-row">
 				<label for="journalEntry">Journal Entry</label>
 				<textarea
 					name="journalEntry"
+					class="journalEntryInput"
 					id="journalEntry"
 					cols="30"
 					rows="5"
@@ -31,16 +41,17 @@
 			</fieldset>
 			<fieldset class="form-row">
 				<label for="journalMood">Mood for the day</label>
-				<select name="journalMood" id="journalMood">
+				<select name="journalMood" class="journalEntryInput" id="journalMood">
 					<option value="meh">meh</option>
 					<option value="purple">purple</option>
 					<option value="German">German</option>
 				</select>
 			</fieldset>
 		</form>
-		<article class="entryLog">
-
-		</article>
+		<section>
+			<button id="submit-button">Submit</button>
+		</section>
+		<article class="entryLog"></article>
 
 		<script src="scripts/journal.js"></script>
 	</body>

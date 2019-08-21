@@ -13,8 +13,9 @@ const journalEntries = [
 		mood: "German"
 	}
 ];
+console.log(journalEntries);
 
-//function to make print journal entries
+//function that prints journal entries to the DOM
 const buildJournalEntry = journalEntryObject => {
 	const journalEntryHTML = `<section>
         <p>${journalEntryObject.date}</p>
@@ -26,7 +27,7 @@ const buildJournalEntry = journalEntryObject => {
 	return journalEntryHTML;
 };
 
-//builds single journal entries together to make the entire journal
+//collects each journal entry and puts them in an array so they can be printed
 const buildJournal = allJournalEntries => {
 	let journalEntriesHTMLString = "";
 	for (let i = 0; i < allJournalEntries.length; i++) {
@@ -37,11 +38,26 @@ const buildJournal = allJournalEntries => {
 	return journalEntriesHTMLString;
 };
 
-buildJournal(journalEntries)
-console.log(buildJournal(journalEntries))
+document.querySelector(".entryLog").innerHTML = buildJournal(journalEntries);
 
-const renderJournalEntriesToDOM = (journalEntries) => {
-    document.querySelector(".entryLog").innerHTML = buildJournal(journalEntries)
-}
+	document
+		.querySelector("#submit-button")
+		.addEventListener("click", function() {
+			console.log("Submitted!");
+			const journalDateInput = document.querySelector("#journalDate").value;
+			const journalConceptInput = document.querySelector("#journalConcept")
+				.value;
+			const journalEntryInput = document.querySelector("#journalEntry").value;
+			const journalMoodInput = document.querySelector("#journalMood").value;
+			const journalInputs = {
+				date: journalDateInput,
+				concept: journalConceptInput,
+				entry: journalEntryInput,
+				mood: journalMoodInput
+			};
+			console.log(journalInputs);
+			journalEntries.push(journalInputs)
+			console.log(journalEntries)
+			document.querySelector(".entryLog").innerHTML = buildJournal(journalEntries);
+		});
 
-renderJournalEntriesToDOM(journalEntries)
