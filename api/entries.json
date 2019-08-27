@@ -1,0 +1,16 @@
+{
+	"entries": [
+		{
+			"date": "08/12/2019",
+			"concept": "JavaScript Basics",
+			"entry": "Learned JavaScript basics like for loops and other mumbojumbo.",
+			"mood": "meh"
+		},
+		{
+			"date": "08/16/2019",
+			"concept": "JavaScript HTML",
+			"entry": "Learning to write HTML with JavaScript",
+			"mood": "German"
+		}
+	]
+}
