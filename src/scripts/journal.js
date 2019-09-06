@@ -1,66 +1,88 @@
+import apiManager from "./apiManager.js";
+import domPrinter from "./domPrinter.js";
+import domPrinterSingle from "./domPrinterSingle.js"
+// ------- POST ENTRIES TO THE DOM ----------//
 
-
-// Get entries from JSON Server
+// When the page loads, fetch all the entries from your json-server API
 apiManager.getJournalEntries().then(parsedEntries => {
-	// Loop through the entries from JSON Server
-	parsedEntries.forEach(entries => {
-		// Print each entry to the DOM
-		domPrinter.printSingleEntry(entries);
-	  });
+	domPrinter.printJournalEntries(parsedEntries);
+});
+// });
+
+// ------- CLICK EVENT FOR POSTING ENTRY TO JSON SERVER ----------//
+
+document.querySelector("#submit-button").addEventListener("click", function() {
+	//grabbing all of my moods
+	const moodList = document.getElementsByName("group1");
+	//empty string to store mood values
+	let moodValues = "";
+	//looping through mood list to determine if they are checked and to set empty string to the value of the checked mood
+	moodList.forEach(mood => {
+		if (mood.checked === true) {
+			moodValues = mood.value;
+		}
 	});
 
+	//object with the values of the input fields to post to JSON server
+	const journalEntryToPost = {
+		date: document.querySelector("#journalDate").value,
+		concept: document.querySelector("#journalConcept").value,
+		entry: document.querySelector("#journalEntry").value,
+		mood: moodValues
+	};
+	document.querySelector("#entryLog").innerHTML = "";
+	//calling function from apiManager.js to post object to JSON Server
+	apiManager
+		.postOneEntry(journalEntryToPost)
+		.then(apiManager.getJournalEntries)
+		.then(parsedJournalEntryArray => {
+			domPrinter.printJournalEntries(parsedJournalEntryArray);
+		});
+});
+// ------- CLICK EVENT FOR DELETE BUTTONS ----------//
 
-	// document
-	// 	.querySelector("#submit-button")
-	// 	.addEventListener("click", function() {
-	// 		console.log("Submitted!");
-	// 		const journalDateInput = document.querySelector("#journalDate").value;
-	// 		const journalConceptInput = document.querySelector("#journalConcept")
-	// 			.value;
-	// 		const journalEntryInput = document.querySelector("#journalEntry").value;
-	// 		const journalMoodInput = document.querySelector("#journalMood").value;
-	// 		const journalInputs = {
-	// 			date: journalDateInput,
-	// 			concept: journalConceptInput,
-	// 			entry: journalEntryInput,
-	// 			mood: journalMoodInput
-	// 		};
-	// 		console.log(journalInputs);
-	// 		journalEntries.push(journalInputs)
-	// 		console.log(journalEntries)
-	// 		document.querySelector(".entryLog").innerHTML = buildJournal(journalEntries);
-	// 	});
+// Add an event listener to the body element because the delete buttons are loaded dynamically-- they don't exist on page load!
+document.querySelector("body").addEventListener("click", () => {
+	// If the user clicks on a delete button, do some stuff
+	const deleteButtonModal = event.currentTarget.querySelector("#deleteModal");
+	const deleteButtonSpan = event.currentTarget.querySelector(".close");
+	const modalYesButton = event.currentTarget.querySelector("#modal-yes");
+	const modalNoButton = event.currentTarget.querySelector("#modal-no");
+	
 
-// fetch("http://localhost:3000/entries") // Fetch from the API
-// .then(entries => entries.json())  // Parse as JSON
-// .then(parsedEntries => {
-// 	parsedEntries.forEach(journalEntryObject => {
-// 		console.log(journalEntryObject)
-// 		document.querySelector("#entryLog").innerHTML += journalEntryHTML 
-// 	});
-// })
+	if (event.target.id.includes("delete-entry")) {
+		const idToDelete = event.target.id.split("-")[2];
+		deleteButtonModal.style.display = "block";
+		deleteButtonSpan.onclick = function() {
+			deleteButtonModal.style.display = "none";
+		};
+		modalNoButton.onclick = function() {
+			deleteButtonModal.style.display = "none";
+		};
+		window.onclick = function(event) {
+			if (event.target == deleteButtonModal) {
+				deleteButtonModal.style.display = "none";
+			}
+		};
+		modalYesButton.onclick = function(event) {
+			if (event.target == modalYesButton) {
+				document.querySelector("#entryLog").innerHTML = "";
+				console.log(event.target);
+				apiManager
+					.deleteOneEntry(idToDelete)
+					.then(apiManager.getJournalEntries)
+					.then(parsedJournalEntryArray => {
+						domPrinter.printJournalEntries(parsedJournalEntryArray);
+					});
+			}
+		};
+	}
+	if (event.target.id.includes("details-button")) {
+		document.querySelector("#entryLog").innerHTML = "";
+		const idToGet = event.target.id.split("-")[2];
+		apiManager.getOneEntry(idToGet).then(parsedResponse => {
+			domPrinterSingle.printSingleEntry(parsedResponse);
+		});
+	}
+});
 
-// //function that prints journal entries to the DOM
-// const buildJournalEntry = journalEntryObject => {
-// 	const journalEntryHTML = `<section>
-//         <p>${journalEntryObject.date}</p>
-//         <p>${journalEntryObject.concept}</p>
-//         <p>${journalEntryObject.entry}</p>
-//         <p>${journalEntryObject.mood}</p>
-//         </section>
-//         `;
-// 	return journalEntryHTML;
-// };
-
-//collects each journal entry and puts them in an array so they can be printed
-// const buildJournal = allJournalEntries => {
-// 	let journalEntriesHTMLString = "";
-// 	for (let i = 0; i < allJournalEntries.length; i++) {
-// 		const singleEntry = buildJournalEntry(allJournalEntries[i]);
-// 		journalEntriesHTMLString += singleEntry;
-// 	}
-// 	// console.log(journalEntriesHTMLString);
-// 	return journalEntriesHTMLString;
-// };
-
-// document.querySelector(".entryLog").innerHTML = buildJournal(journalEntries);

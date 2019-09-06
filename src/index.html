@@ -1,61 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!--Import Google Icon Font-->
+		<!-- <link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/> -->
+		<!--Import materialize.css-->
+		<!-- <link
+			type="text/css"
+			rel="stylesheet"
+			href="styles/materialize.min.css"
+			media="screen,projection"
+		/> -->
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Raleway"
+		/>
+		<style>
+			body,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5 {
+				font-family: "Raleway", sans-serif;
+			}
+		</style>
 		<meta charset="UTF-8" />
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Document</title>
 
 		<link rel="stylesheet" href="styles/journal.css" />
 	</head>
-	<body>
-		<h1 class="journal__header">Daily Journal</h1>
-		<form action="" class="journal__form" id="journalForm">
-			<fieldset class="form-row">
-				<label for="journalDate">Date of entry</label>
-				<input
-					type="date"
-					name="journalDate"
-					class="journalEntryInput"
-					id="journalDate"
-				/>
-			</fieldset>
-			<fieldset class="form-row">
-				<label for="journalConcept">Concepts covered</label>
-				<input
-					type="text"
-					name="journalConcept"
-					class="journalEntryInput"
-					id="journalConcept"
-				/>
-			</fieldset>
-			<fieldset class="form-row">
-				<label for="journalEntry">Journal Entry</label>
-				<textarea
-					name="journalEntry"
-					class="journalEntryInput"
-					id="journalEntry"
-					cols="30"
-					rows="5"
-				></textarea>
-			</fieldset>
-			<fieldset class="form-row">
-				<label for="journalMood">Mood for the day</label>
-				<select name="journalMood" class="journalEntryInput" id="journalMood">
-					<option value="meh">meh</option>
-					<option value="purple">purple</option>
-					<option value="German">German</option>
-				</select>
-			</fieldset>
-		</form>
-		<section>
-			<button id="submit-button">Submit</button>
-		</section>
-		<article id="entryLog"></article>
+	<body class="w3-light-grey">
+		<div class="w3-content" style="max-width:1400px">
+			<header class="w3-container w3-center w3-padding-32">
+				<h1 class="journal__header"><b>Daily Journal</b></h1>
+				<p>Welcome to the daily journal of <span class="w3-tag">Alex</span></p>
+			</header>
+			<!-- Grid -->
+			<div class="w3-row">
+				<form action="" class="journal__form" id="journalForm">
+					<fieldset class="form-row">
+						<label for="journalDate">Date of entry</label>
+						<input
+							type="date"
+							name="journalDate"
+							class="journalEntryInput validate"
+							id="journalDate"
+						/>
+					</fieldset>
+					<fieldset class="form-row">
+						<label for="journalConcept">Concepts covered</label>
+						<input
+							type="text"
+							name="journalConcept"
+							class="journalEntryInput"
+							id="journalConcept"
+						/>
+					</fieldset>
+					<fieldset class="form-row">
+						<label for="journalEntry">Journal Entry</label>
+						<textarea
+							name="journalEntry"
+							class="journalEntryInput"
+							id="journalEntry"
+							cols="30"
+							rows="5"
+						></textarea>
+					</fieldset>
+					<form action="#">
+						<p>
+							<label>
+								<input
+									id="meh"
+									class="with-gap"
+									name="group1"
+									type="radio"
+									value="meh"
+									checked
+								/>
+								<span>Meh</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input
+									id="idkman"
+									class="with-gap"
+									name="group1"
+									type="radio"
+									value="idkman"
+								/>
+								<span>Idk man</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input
+									id="okay"
+									class="with-gap"
+									name="group1"
+									type="radio"
+									value="okay"
+								/>
+								<span>Okay</span>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input
+									id="spiffy"
+									class="with-gap"
+									name="group1"
+									type="radio"
+									value="spiffy"
+								/>
+								<span>Spiffy</span>
+							</label>
+						</p>
+					</form>
+				</form>
+				<section>
+					<button id="submit-button" class="w3-button w3-padding-large w3-white w3-border">
+						Record Journal Entry
+					</button>
+				</section>
+				<!-- Blog entries -->
+				<div class="w3-col l8 s12">
+					<article id="entryLog" class="center-align"></article>
+				</div>
+			</div>
+			<!-- END GRID -->
+		</div>
+		<br />
 
-		<script src="scripts/apiManager.js"></script>
-		<script src="scripts/journal.js"></script>
-		<script src="scripts/singleJournalEntry.js"></script>
-		<script src="scripts/domPrinter.js"></script>
+		<script type="text/javascript" src="scripts/materialize.min.js"></script>
+		<script type="module" src="scripts/journal.js"></script>
 	</body>
 </html>

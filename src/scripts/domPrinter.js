@@ -1,34 +1,26 @@
 // Module that contains function to print to the DOM
 
-const domPrinter = {
-	printSingleEntry: entryFromJSON => {
-		// Build HTML string for individual entry
-		const htmlString = journalEntryHTML.buildSingleEntry(entryFromJSON);
-		// Add HTML string to DOM
-		document.querySelector("#entryLog").innerHTML += htmlString;
-	}
-};
-
-
-
-
-
-
-
-
-
+import journalEntryHTML from "./singleJournalEntry.js";
 
 // const domPrinter = {
-//     // Accepts two parameters: a food from JSON Server and a food from the API
-//   printSingleFood: (foodFromJSONServer, foodFromExternalAPI) => {
-//     if (foodFromExternalAPI.product.ingredients_text) {
-//       foodFromJSONServer.ingredients = foodFromExternalAPI.product.ingredients_text;
-//     } else {
-//       foodFromJSONServer.ingredients = "no ingredients listed";
-//     }
-//     // Build HTML string for individual food
-//     const htmlString = htmlBuilder.buildFoodCard(foodFromJSONServer);
-//     // Add HTML string to DOM
-//     document.querySelector("#container").innerHTML += htmlString;
-//   }
+// 	printSingleEntry: entryFromJSON => {
+// 		// Build HTML string for individual entry
+// 		const htmlString = journalEntryHTML.buildSingleEntry(entryFromJSON);
+// 		// Add HTML string to DOM
+// 		document.querySelector("#entryLog").innerHTML += htmlString;
+// 	}
 // };
+
+
+const domPrinter = {
+	printJournalEntries: arrayOfEntries => {
+		let journalEntries = "";
+		for (let i = 0; i < arrayOfEntries.length; i++) {
+			journalEntries += journalEntryHTML.buildJournalEntry(arrayOfEntries[i])
+		  }
+		  document.querySelector("#entryLog").innerHTML += journalEntries
+		//   `<div class="row">${journalEntries}</div>`;
+	}
+}
+
+export default domPrinter;
