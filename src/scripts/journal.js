@@ -1,6 +1,6 @@
 import apiManager from "./apiManager.js";
 import domPrinter from "./domPrinter.js";
-import domPrinterSingle from "./domPrinterSingle.js"
+import domPrinterSingle from "./domPrinterSingle.js";
 // ------- POST ENTRIES TO THE DOM ----------//
 
 // When the page loads, fetch all the entries from your json-server API
@@ -30,7 +30,6 @@ document.querySelector("#submit-button").addEventListener("click", function() {
 		entry: document.querySelector("#journalEntry").value,
 		mood: moodValues
 	};
-	document.querySelector("#entryLog").innerHTML = "";
 	//calling function from apiManager.js to post object to JSON Server
 	apiManager
 		.postOneEntry(journalEntryToPost)
@@ -48,7 +47,6 @@ document.querySelector("body").addEventListener("click", () => {
 	const deleteButtonSpan = event.currentTarget.querySelector(".close");
 	const modalYesButton = event.currentTarget.querySelector("#modal-yes");
 	const modalNoButton = event.currentTarget.querySelector("#modal-no");
-	
 
 	if (event.target.id.includes("delete-entry")) {
 		const idToDelete = event.target.id.split("-")[2];
@@ -66,7 +64,6 @@ document.querySelector("body").addEventListener("click", () => {
 		};
 		modalYesButton.onclick = function(event) {
 			if (event.target == modalYesButton) {
-				document.querySelector("#entryLog").innerHTML = "";
 				console.log(event.target);
 				apiManager
 					.deleteOneEntry(idToDelete)
@@ -78,11 +75,46 @@ document.querySelector("body").addEventListener("click", () => {
 		};
 	}
 	if (event.target.id.includes("details-button")) {
-		document.querySelector("#entryLog").innerHTML = "";
 		const idToGet = event.target.id.split("-")[2];
 		apiManager.getOneEntry(idToGet).then(parsedResponse => {
 			domPrinterSingle.printSingleEntry(parsedResponse);
 		});
 	}
-});
+	if (event.target.id.includes("edit-button")) {
+		const idToGet = event.target.id.split("-")[2];
+		apiManager.getOneEntry(idToGet).then(parsedResponse => {
+			domPrinterSingle.printJournalEditForm(parsedResponse);
+		});
+	}
+	if (event.target.id.includes("save-edit")) {
+		// Get the id of the thing we want to edit
+		const idToGet = event.target.id.split("-")[2];
 
+		// Get the value of the input
+		const editedConceptValue = 
+		document.querySelector(`#edit-concept-${idToGet}`).value;
+		const editedDateValue = 
+		document.querySelector(`#edit-date-${idToGet}`).value;
+		const editedEntryValue = 
+		document.querySelector(`#edit-entry-${idToGet}`).value;
+		const editedMoodValue =
+		document.querySelector(`#edit-mood-${idToGet}`).value;
+
+		// Put the input value into an object
+		const editedJournalObj = {
+			concept: editedConceptValue,
+			date: editedDateValue,
+			entry: editedEntryValue,
+			mood: editedMoodValue
+		};
+
+		// Send to database w/ PUT method
+		apiManager
+			.editOneEntry(idToGet, editedJournalObj)
+			.then(() => {
+				apiManager.getJournalEntries().then(allEntries => {
+					domPrinter.printJournalEntries(allEntries);
+				});
+			});
+	}
+});

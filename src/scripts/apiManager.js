@@ -19,8 +19,16 @@ const apiManager = {
 	getOneEntry: id => {
 		return fetch(`http://localhost:8088/entries/${id}`).then(response =>
 			response.json()
-		);
-	}
+		)
+	},
+	editOneEntry: (id, journalObjectToEdit) =>
+		fetch(`http://localhost:8088/entries/${id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(journalObjectToEdit)
+		}),
 };
 
 export default apiManager;
