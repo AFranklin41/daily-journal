@@ -4,7 +4,7 @@ const journalEntryHTML = {
 	buildJournalEntry: journalEntryObject => {
 		return `
     <!-- Blog entries -->
-    <div class="w3-col l8 s12">
+    <div class="w3-col s6">
       <div class="w3-card-4 w3-margin w3-white">
         <div class="w3-container">
           <section class="journal-card" id="journal-card-${journalEntryObject.id}">
@@ -16,7 +16,7 @@ const journalEntryHTML = {
               <div class="w3-col m8 s12">
                 <p>${journalEntryObject.mood}</p>
                 </section>
-                
+
                 <p><b><button id="details-button-${journalEntryObject.id}"
                       class="w3-button w3-padding-large w3-white w3-border">Details »</button></b></p>
                 <p><b><button id="edit-button-${journalEntryObject.id}"
@@ -24,7 +24,7 @@ const journalEntryHTML = {
                 <p><b><button class="w3-button w3-padding-large w3-white w3-border"
                       id="delete-entry-${journalEntryObject.id}">
                       Delete »</button></b></p>
-  
+
                 <div id="deleteModal" class="modal">
                   <div class="modal-content">
                     <span class="close">&times;</span>

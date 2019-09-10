@@ -29,18 +29,11 @@
       "id": 4
     },
     {
-      "date": "",
-      "concept": "",
-      "entry": "",
+      "date": "2019-09-10",
+      "concept": "CSS man...",
+      "entry": "more styling... I hate CSS so much.\n\ntemplates are awful because they're doing all of the work behind the scenes. probably better to suffer through it myself than deal with trying to figure out templates. maybe.",
       "mood": "meh",
       "id": 5
-    },
-    {
-      "date": "",
-      "concept": "",
-      "entry": "",
-      "mood": "spiffy",
-      "id": 6
     }
   ]
 }

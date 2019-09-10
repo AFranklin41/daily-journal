@@ -13,7 +13,7 @@ const domPrinterSingle = {
 
         const targetCard = document.querySelector(`#journal-card-${journalObjectToEdit.id}`)
         console.log(targetCard)
-	
+
         targetCard.innerHTML += `
           <section>
           <h5>Edit Concept</h5>
@@ -26,7 +26,7 @@ const domPrinterSingle = {
           <input id="edit-mood-${journalObjectToEdit.id}" type="text" value="${journalObjectToEdit.mood}">
 		  <button id="save-edit-${journalObjectToEdit.id}">Save</button>
 		</section>`
-	
+
 	}
 };
 
